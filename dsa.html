@@ -1,0 +1,450 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>DSA Tracker - Placement &amp; Study Tracker</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#272a31",
+                    "secondary": "#a6e6ff",
+                    "error-container": "#93000a",
+                    "on-tertiary": "#3a3000",
+                    "background": "#10131a",
+                    "primary": "#e9feff",
+                    "primary-fixed-dim": "#00dce5",
+                    "surface-variant": "#32353c",
+                    "on-primary-fixed": "#002021",
+                    "outline": "#849495",
+                    "on-tertiary-fixed": "#221b00",
+                    "primary-container": "#00f5ff",
+                    "surface-dim": "#10131a",
+                    "on-primary-fixed-variant": "#004f53",
+                    "on-surface": "#e1e2eb",
+                    "tertiary-container": "#ffdb3f",
+                    "on-error": "#690005",
+                    "surface-tint": "#00dce5",
+                    "inverse-primary": "#00696e",
+                    "surface": "#10131a",
+                    "outline-variant": "#3a494a",
+                    "secondary-fixed-dim": "#4cd6ff",
+                    "surface-container": "#1d2026",
+                    "on-secondary-fixed-variant": "#004e60",
+                    "on-primary": "#003739",
+                    "tertiary-fixed": "#ffe16c",
+                    "on-surface-variant": "#b9caca",
+                    "on-primary-container": "#006c71",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed": "#001f28",
+                    "tertiary": "#fff9f0",
+                    "primary-fixed": "#63f7ff",
+                    "on-secondary-container": "#00566b",
+                    "on-tertiary-container": "#736000",
+                    "inverse-on-surface": "#2e3037",
+                    "surface-container-lowest": "#0b0e14",
+                    "secondary-container": "#14d1ff",
+                    "on-tertiary-fixed-variant": "#544600",
+                    "surface-bright": "#363940",
+                    "secondary-fixed": "#b7eaff",
+                    "on-secondary": "#003543",
+                    "surface-container-highest": "#32353c",
+                    "tertiary-fixed-dim": "#e7c427",
+                    "inverse-surface": "#e1e2eb",
+                    "on-background": "#e1e2eb",
+                    "surface-container-low": "#191c22",
+                    "error": "#ffb4ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "stack-gap": "12px",
+                    "margin-desktop": "40px",
+                    "sidebar-width": "240px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-caps": ["JetBrains Mono"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "stats-numeric": ["Inter"],
+                    "display": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "stats-numeric": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Base styles to ensure consistency with 'Layered Dark' aesthetic */
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        /* Custom Scrollbar for modern look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-lowest'); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-variant'); 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline'); 
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased overflow-hidden flex h-screen w-screen selection:bg-primary-fixed-dim/30 selection:text-primary">
+<!-- JSON Component: SideNavBar -->
+<nav class="hidden md:flex flex-col bg-surface-container-low dark:bg-surface-container-low w-sidebar-width h-screen fixed left-0 top-0 border-r border-outline-variant z-40">
+<div class="flex flex-col h-full py-gutter px-stack-gap">
+<!-- Header Profile Section -->
+<div class="flex items-center gap-3 mb-8 px-3">
+<div class="h-10 w-10 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden shrink-0 relative group">
+<img class="object-cover w-full h-full opacity-90 group-hover:opacity-100 transition-opacity" data-alt="A stylized, high-tech avatar illustration of an engineering student in a dark, glowing futuristic setting. The art style is minimalist vector with glowing cyan and electric blue accents against a deep charcoal background, conveying intelligence and modern technical proficiency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFWIe0k_moRphB27ZLuTAk2aYv50wKqkCMsFluK95mcVTXWero0o9pcNnY_z-Ykh2aBVsPPmHN34ZcSnWn1pf1vT8-8imd8CXSbAoJM4U3D2BO3SApznNFkhSZzNJrCcY1-1CM3KAg2EMLgHN3TBsx8w7kAqq419Z8DQ9fIrKfT02xNxp4iOwqnj-2sJEAw7I0_p91h7whCzZdWwcpuCAEGKE7nvYQy30ist_k72vUTB77YgV_gShjN11K3-PCCd99t9y3fe78Vt9N">
+</div>
+<div class="flex flex-col overflow-hidden">
+<span class="font-headline-md text-body-lg font-bold text-primary-fixed-dim truncate">Future Engineer</span>
+<span class="text-label-caps text-on-surface-variant truncate">Career Roadmap</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col gap-1 flex-1">
+<!-- Dashboard (Inactive) -->
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 group" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">grid_view</span>
+<span class="">Dashboard</span>
+</a>
+</li>
+<!-- DSA Tracker (Active) -->
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary-fixed-dim font-bold bg-surface-variant/50 border-l-2 border-secondary-fixed-dim scale-95 active:scale-90 transition-transform group" href="#">
+<span class="material-symbols-outlined text-[20px] shadow-[0_0_8px_rgba(76,214,255,0.4)] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">terminal</span>
+<span class="">DSA Tracker</span>
+</a>
+</li>
+<!-- Resume (Inactive) -->
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 group" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">article</span>
+<span class="">Resume</span>
+</a>
+</li>
+<!-- Companies (Inactive) -->
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 group" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">apartment</span>
+<span class="">Companies</span>
+</a>
+</li>
+<!-- Analytics (Inactive) -->
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 group" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">bar_chart</span>
+<span class="">Analytics</span>
+</a>
+</li><li class="">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 group" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">record_voice_over</span>
+<span class="">Mock Interviews</span>
+</a>
+</li>
+<!-- Settings (Inactive) -->
+<li class="mt-auto">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 group" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">settings</span>
+<span class="">Settings</span>
+</a>
+</li>
+</ul>
+<!-- CTA -->
+<button class="mt-4 w-full bg-gradient-to-r from-primary-fixed-dim to-[#00f5ff] text-on-primary-fixed font-body-md font-semibold py-2.5 px-4 rounded-lg hover:shadow-[0_0_12px_rgba(0,220,229,0.3)] transition-all">
+                Prepare for Placements
+            </button>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<main class="flex-1 flex flex-col ml-0 md:ml-[240px] relative h-full bg-background overflow-hidden">
+<!-- JSON Component: TopNavBar -->
+<header class="bg-surface-container-lowest/80 dark:bg-surface-container-lowest/80 backdrop-blur-md fixed top-0 right-0 w-full md:w-[calc(100%-240px)] z-30 border-b border-outline-variant">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16">
+<!-- Brand / Search -->
+<div class="flex items-center gap-6 flex-1">
+<h1 class="hidden lg:block font-headline-md text-headline-md font-bold text-primary-fixed-dim truncate">Placement &amp; Study Tracker</h1>
+<div class="relative w-full max-w-md focus-within:ring-2 focus-within:ring-primary-fixed-dim/20 rounded-lg group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary-fixed-dim transition-colors text-[20px]">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant text-on-surface placeholder:text-on-surface-variant rounded-lg pl-10 pr-4 py-2 font-body-md focus:outline-none focus:border-primary-fixed-dim transition-colors inset-shadow-sm" placeholder="Search problems, topics..." type="text">
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-2 shrink-0">
+<button aria-label="Notifications" class="p-2 text-on-surface-variant hover:text-primary-fixed hover:bg-surface-variant rounded-lg transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="Help" class="p-2 text-on-surface-variant hover:text-primary-fixed hover:bg-surface-variant rounded-lg transition-all">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-8 w-8 ml-2 rounded-full bg-surface-container border border-outline-variant overflow-hidden cursor-pointer">
+<img class="object-cover w-full h-full opacity-80 hover:opacity-100 transition-opacity" data-alt="A sleek, low-poly abstract rendering of a user profile icon in shades of electric blue and deep charcoal, matching a minimalist, high-performance developer aesthetic. It should look like a default avatar for a premium tech product." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWo1q98piodwoK7JZPw10bYp_63kvASH2Q2qPPQPQUr2MKSHmLD0IY8dEp5WwNtcflP5Qt7TV5CYvr_hpSkLPD7xAbK5vA1Gn9Ojk23sYjL6CLzVGL3U0Mi36Xlg5nOEb5OfAiPe8pH1Sr5_sjW8lyp5Eb-fpBM9MtDPOcmzV3W1pnxWa121pAQ5Ngdet3eO_ZfLlILy_k0OEBYk7uYt5pjOvpIvsIKkBkz_JoDkC6KpCpP_VUnPsO2uHGbyOV0ap-gsrwe9YGsTmq">
+</div>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto pt-24 pb-gutter px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto">
+<header class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-1">DSA Mastery Tracker</h2>
+<p class="text-on-surface-variant font-body-md">Monitor your problem-solving progress across key algorithmic paradigms.</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-stats-numeric text-stats-numeric text-primary-fixed-dim">142</span>
+<span class="text-on-surface-variant text-label-caps uppercase tracking-wider">Total Solved</span>
+</div>
+</header>
+<!-- Topic Progress Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+<!-- Arrays Card -->
+<div class="bg-surface-container rounded-2xl border border-outline-variant p-6 relative overflow-hidden group hover:border-outline transition-colors hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(0,220,229,0.15)] transition-transform">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<div class="p-2 bg-surface-variant rounded-lg text-on-surface">
+<span class="material-symbols-outlined text-[20px]">view_array</span>
+</div>
+<h3 class="font-headline-md text-[18px] text-on-surface font-semibold">Arrays &amp; Hashing</h3>
+</div>
+<span class="font-stats-numeric text-body-lg text-primary-fixed-dim font-bold">80%</span>
+</div>
+<!-- Progress Track -->
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden mt-4 relative">
+<div class="h-full bg-gradient-to-r from-secondary-fixed-dim to-primary-fixed-dim rounded-full relative" style="width: 80%;">
+<!-- Glow effect on tip -->
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-primary-fixed-dim blur-sm opacity-50 rounded-full"></div>
+</div>
+</div>
+<div class="mt-3 flex justify-between text-label-caps text-on-surface-variant">
+<span class="">40 Solved</span>
+<span class="">50 Total</span>
+</div>
+</div>
+<!-- Trees Card -->
+<div class="bg-surface-container rounded-2xl border border-outline-variant p-6 relative overflow-hidden group hover:border-outline transition-colors hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(231,196,39,0.15)] transition-transform">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<div class="p-2 bg-surface-variant rounded-lg text-on-surface">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+</div>
+<h3 class="font-headline-md text-[18px] text-on-surface font-semibold">Trees &amp; Graphs</h3>
+</div>
+<span class="font-stats-numeric text-body-lg text-tertiary-fixed-dim font-bold">40%</span>
+</div>
+<!-- Progress Track -->
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden mt-4">
+<div class="h-full bg-gradient-to-r from-tertiary-container to-tertiary-fixed-dim rounded-full" style="width: 40%;"></div>
+</div>
+<div class="mt-3 flex justify-between text-label-caps text-on-surface-variant">
+<span class="">12 Solved</span>
+<span class="">30 Total</span>
+</div>
+</div>
+<!-- DP Card -->
+<div class="bg-surface-container rounded-2xl border border-outline-variant p-6 relative overflow-hidden group hover:border-outline transition-colors hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,180,171,0.15)] transition-transform">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<div class="p-2 bg-surface-variant rounded-lg text-on-surface">
+<span class="material-symbols-outlined text-[20px]">dynamic_form</span>
+</div>
+<h3 class="font-headline-md text-[18px] text-on-surface font-semibold">Dynamic Programming</h3>
+</div>
+<span class="font-stats-numeric text-body-lg text-error font-bold">20%</span>
+</div>
+<!-- Progress Track -->
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden mt-4">
+<div class="h-full bg-gradient-to-r from-error-container to-error rounded-full" style="width: 20%;"></div>
+</div>
+<div class="mt-3 flex justify-between text-label-caps text-on-surface-variant">
+<span class="">5 Solved</span>
+<span class="">25 Total</span>
+</div>
+</div>
+</section>
+<!-- Table Controls -->
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
+<!-- Filters -->
+<div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-2 sm:pb-0 hide-scrollbar">
+<button class="flex items-center gap-2 px-3 py-1.5 bg-surface border border-outline-variant rounded-lg text-on-surface text-body-md hover:border-primary-fixed-dim/50 hover:bg-surface-variant transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">filter_list</span>
+                        Category: All
+                    </button>
+<button class="flex items-center gap-2 px-3 py-1.5 bg-surface border border-outline-variant rounded-lg text-on-surface text-body-md hover:border-primary-fixed-dim/50 hover:bg-surface-variant transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">signal_cellular_alt</span>
+                        Difficulty
+                    </button>
+<button class="flex items-center gap-2 px-3 py-1.5 bg-surface border border-outline-variant rounded-lg text-on-surface text-body-md hover:border-primary-fixed-dim/50 hover:bg-surface-variant transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">task_alt</span>
+                        Status
+                    </button>
+</div>
+<!-- Secondary Actions -->
+<button class="flex items-center gap-2 px-4 py-1.5 bg-transparent border border-outline-variant rounded-lg text-primary-fixed-dim text-body-md font-medium hover:border-primary-fixed-dim hover:bg-primary-fixed-dim/5 transition-colors w-full sm:w-auto justify-center">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Custom Problem
+                </button>
+</div>
+<!-- Notion-like Table Container -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl overflow-hidden w-full overflow-x-auto shadow-sm">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="bg-surface-container-highest/30 border-b border-outline-variant/60">
+<th class="py-3 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase w-10 text-center">Status</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase">Problem Title</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase w-32">Difficulty</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase w-48">Topic</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase w-24 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md text-on-surface divide-y divide-outline-variant/30">
+<!-- Row: Solved / Easy -->
+<tr class="hover:bg-surface-container/50 transition-colors group cursor-default hover:bg-surface-variant/20 hover:scale-[1.005] transition-all duration-200">
+<td class="py-3 px-4 text-center">
+<span class="material-symbols-outlined text-[20px] text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="py-3 px-4 font-medium text-inverse-surface group-hover:text-primary-fixed transition-colors">
+                                Two Sum
+                            </td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-label-caps font-semibold uppercase tracking-wider bg-primary-fixed-dim/10 text-primary-fixed-dim border border-primary-fixed-dim/20">Easy</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">Arrays &amp; Hashing</td>
+<td class="py-3 px-4 text-right">
+<button class="text-on-surface-variant hover:text-primary-fixed-dim px-3 py-1 rounded border border-transparent hover:border-outline-variant transition-colors text-[13px] font-medium">Review</button>
+</td>
+</tr>
+<!-- Row: Unsolved / Medium -->
+<tr class="hover:bg-surface-container/50 transition-colors group cursor-default hover:bg-surface-variant/20 hover:scale-[1.005] transition-all duration-200">
+<td class="py-3 px-4 text-center">
+<span class="material-symbols-outlined text-[20px] text-outline-variant">radio_button_unchecked</span>
+</td>
+<td class="py-3 px-4 font-medium text-inverse-surface group-hover:text-primary-fixed transition-colors">
+                                Group Anagrams
+                            </td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-label-caps font-semibold uppercase tracking-wider bg-tertiary-fixed-dim/10 text-tertiary-fixed-dim border border-tertiary-fixed-dim/20">Medium</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">Arrays &amp; Hashing</td>
+<td class="py-3 px-4 text-right">
+<button class="text-primary-fixed-dim hover:text-primary-fixed hover:bg-primary-fixed-dim/10 px-3 py-1 rounded transition-colors text-[13px] font-medium">Solve</button>
+</td>
+</tr>
+<!-- Row: Attempted / Hard -->
+<tr class="hover:bg-surface-container/50 transition-colors group cursor-default hover:bg-surface-variant/20 hover:scale-[1.005] transition-all duration-200">
+<td class="py-3 px-4 text-center">
+<span class="material-symbols-outlined text-[20px] text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">pending</span>
+</td>
+<td class="py-3 px-4 font-medium text-inverse-surface group-hover:text-primary-fixed transition-colors">
+                                Minimum Window Substring
+                            </td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-label-caps font-semibold uppercase tracking-wider bg-error/10 text-error border border-error/20">Hard</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">Sliding Window</td>
+<td class="py-3 px-4 text-right">
+<button class="text-primary-fixed-dim hover:text-primary-fixed hover:bg-primary-fixed-dim/10 px-3 py-1 rounded transition-colors text-[13px] font-medium">Retry</button>
+</td>
+</tr>
+<!-- Row: Unsolved / Medium -->
+<tr class="hover:bg-surface-container/50 transition-colors group cursor-default hover:bg-surface-variant/20 hover:scale-[1.005] transition-all duration-200">
+<td class="py-3 px-4 text-center">
+<span class="material-symbols-outlined text-[20px] text-outline-variant">radio_button_unchecked</span>
+</td>
+<td class="py-3 px-4 font-medium text-inverse-surface group-hover:text-primary-fixed transition-colors">
+                                Validate Binary Search Tree
+                            </td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-label-caps font-semibold uppercase tracking-wider bg-tertiary-fixed-dim/10 text-tertiary-fixed-dim border border-tertiary-fixed-dim/20">Medium</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">Trees</td>
+<td class="py-3 px-4 text-right">
+<button class="text-primary-fixed-dim hover:text-primary-fixed hover:bg-primary-fixed-dim/10 px-3 py-1 rounded transition-colors text-[13px] font-medium">Solve</button>
+</td>
+</tr>
+<!-- Row: Solved / Hard -->
+<tr class="hover:bg-surface-container/50 transition-colors group cursor-default hover:bg-surface-variant/20 hover:scale-[1.005] transition-all duration-200">
+<td class="py-3 px-4 text-center">
+<span class="material-symbols-outlined text-[20px] text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="py-3 px-4 font-medium text-inverse-surface group-hover:text-primary-fixed transition-colors">
+                                Edit Distance
+                            </td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-label-caps font-semibold uppercase tracking-wider bg-error/10 text-error border border-error/20">Hard</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">Dynamic Programming</td>
+<td class="py-3 px-4 text-right">
+<button class="text-on-surface-variant hover:text-primary-fixed-dim px-3 py-1 rounded border border-transparent hover:border-outline-variant transition-colors text-[13px] font-medium">Review</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Table Footer / Pagination Dummy -->
+<div class="px-4 py-3 border-t border-outline-variant/30 flex justify-between items-center text-on-surface-variant text-[13px]">
+<span class="">Showing 1-5 of 150 problems</span>
+<div class="flex gap-1">
+<button class="p-1 rounded hover:bg-surface-variant hover:text-on-surface transition-colors disabled:opacity-50"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+<button class="p-1 rounded hover:bg-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<style>
+        /* Hide scrollbar utility for filter bar */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+
+
+
+</body></html>

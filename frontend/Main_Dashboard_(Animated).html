@@ -1,0 +1,387 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Placement &amp; Study Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#272a31",
+                        "secondary": "#a6e6ff",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#3a3000",
+                        "background": "#10131a",
+                        "primary": "#e9feff",
+                        "primary-fixed-dim": "#00dce5",
+                        "surface-variant": "#32353c",
+                        "on-primary-fixed": "#002021",
+                        "outline": "#849495",
+                        "on-tertiary-fixed": "#221b00",
+                        "primary-container": "#00f5ff",
+                        "surface-dim": "#10131a",
+                        "on-primary-fixed-variant": "#004f53",
+                        "on-surface": "#e1e2eb",
+                        "tertiary-container": "#ffdb3f",
+                        "on-error": "#690005",
+                        "surface-tint": "#00dce5",
+                        "inverse-primary": "#00696e",
+                        "surface": "#10131a",
+                        "outline-variant": "#3a494a",
+                        "secondary-fixed-dim": "#4cd6ff",
+                        "surface-container": "#1d2026",
+                        "on-secondary-fixed-variant": "#004e60",
+                        "on-primary": "#003739",
+                        "tertiary-fixed": "#ffe16c",
+                        "on-surface-variant": "#b9caca",
+                        "on-primary-container": "#006c71",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed": "#001f28",
+                        "tertiary": "#fff9f0",
+                        "primary-fixed": "#63f7ff",
+                        "on-secondary-container": "#00566b",
+                        "on-tertiary-container": "#736000",
+                        "inverse-on-surface": "#2e3037",
+                        "surface-container-lowest": "#0b0e14",
+                        "secondary-container": "#14d1ff",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "surface-bright": "#363940",
+                        "secondary-fixed": "#b7eaff",
+                        "on-secondary": "#003543",
+                        "surface-container-highest": "#32353c",
+                        "tertiary-fixed-dim": "#e7c427",
+                        "inverse-surface": "#e1e2eb",
+                        "on-background": "#e1e2eb",
+                        "surface-container-low": "#191c22",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "stack-gap": "12px",
+                        "margin-desktop": "40px",
+                        "sidebar-width": "240px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "stats-numeric": ["Inter"],
+                        "display": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "stats-numeric": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .circular-chart { display: block; margin: 0 auto; max-width: 80%; max-height: 250px; }
+        .circle-bg { fill: none; stroke: #21262D; stroke-width: 3.8; }
+        .circle { fill: none; stroke-width: 2.8; stroke-linecap: round; animation: progress 1s ease-out forwards; animation-delay: 0.2s; }
+        @keyframes progress { 0% { stroke-dasharray: 0 100; } }
+        .glow-effect { filter: drop-shadow(0 0 4px rgba(0, 220, 229, 0.4)); }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Shimmer Effect */
+        @keyframes shimmer {
+            0% { transform: translateX(-150%) skewX(-20deg); }
+            100% { transform: translateX(250%) skewX(-20deg); }
+        }
+        .btn-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-20deg);
+            animation: shimmer 3s infinite;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body-md text-body-md antialiased min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-240px)] z-50 bg-surface-container-lowest/80 dark:bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-margin-desktop h-16">
+<!-- Search Area -->
+<div class="flex items-center w-96 bg-surface-container-low rounded-lg border border-outline-variant px-3 py-2 focus-within:ring-2 focus-within:ring-primary-fixed-dim/20 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-2 text-[20px]">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-body-md text-on-surface placeholder-on-surface-variant outline-none" placeholder="Search resources, goals..." type="text">
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button aria-label="notifications" class="p-2 text-on-surface-variant hover:text-primary-fixed hover:bg-surface-variant rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button aria-label="help" class="p-2 text-on-surface-variant hover:text-primary-fixed hover:bg-surface-variant rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">help</span>
+</button>
+<div class="w-px h-6 bg-outline-variant mx-2"></div>
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover cursor-pointer" data-alt="A small circular profile picture of a young professional engineering student, featuring a modern, dark high-tech background, soft studio lighting emphasizing sharp features, evoking a disciplined and ambitious mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUR7WYA-bvt33qcF0BlzeIX9E-gN18BfIrqS34qN3CW-EBloUOHUfElce-W8NxyPwPAJJ-uXGsUs-s-EcXMQehVQjOmv6WkXp1w7cjOm6htz3tpcddamvA_wfZw954-9rghkSwsUvpPfAyLDKxC4audHwTJikVBbWPgs12_UJ7yU0rnnpgbBNno00XIqpDXI0cszOH07hIssxofM-NIgpOi75mua7ZColfvGCeS_8VJOuMa-p7-l9_twn33cGwRC452x8ZmZC2RNtv">
+</div>
+</header>
+<!-- Side Navigation Bar -->
+<aside class="w-sidebar-width h-screen fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-low border-r border-outline-variant flex flex-col h-full py-gutter px-stack-gap z-40">
+<!-- Brand / Header -->
+<div class="mb-8 px-4 mt-2">
+<h1 class="font-headline-md text-headline-md font-bold text-primary-fixed-dim tracking-tight">Placement &amp; Study Tracker</h1>
+</div>
+<!-- Nav Links -->
+<nav class="flex-1 flex flex-col gap-1">
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-secondary-fixed-dim font-bold bg-surface-variant/50 border-l-2 border-secondary-fixed-dim scale-95 active:scale-90 transition-transform transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5" style="font-variation-settings: &quot;FILL&quot; 1;">grid_view</span>
+                Dashboard
+            </a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">terminal</span>
+                DSA Tracker
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">article</span>
+                Resume
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">apartment</span>
+                Companies
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">insights</span>
+                Analytics
+            </a><a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">record_voice_over</span>
+                Mock Interviews
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform mt-auto mb-4" href="#">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 ease-out group-hover:scale-110 group-hover:-translate-y-0.5">settings</span>
+                Settings
+            </a>
+</nav>
+<!-- Sidebar CTA Card -->
+<div class="mt-auto bg-surface-variant/30 border border-outline-variant rounded-xl p-4 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full bg-surface" data-alt="A stylized 3D avatar of a professional engineering student, wearing futuristic smart glasses, set against a dark cybernetic background, illuminated by subtle cyan edge lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY1SJoQUkdpo2gZRicg50TtxANdZzN1IRDhRKpuhFC5ond9oyV7uIaaegW-e8MntRsVPJlMY5Uej8PdfcYfHERCFg5oOoB1N4SUUjdqcCChQ0OnO3l8S8RNKpuG0uDeR1pi6peD1OkPonkXUA7RxhYNDvYJASfpthWcL1eAarqGxg8gdWEgdTjWXorcZzNCRkVRGdKi9g69Vhdl47-bBDzV2A5hy2JNv5ESJqG57D1IG2j7FEff-Q4FCU4cGhoxxpAHlgbAnpTkC0c">
+<div>
+<div class="text-on-surface font-body-md font-semibold">Future Engineer</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">Career Roadmap</div>
+</div>
+</div>
+<button class="w-full py-2 px-4 rounded-lg bg-gradient-to-r from-inverse-primary to-primary-container text-on-primary-fixed font-semibold font-body-md hover:opacity-90 transition-opacity btn-shimmer relative overflow-hidden">
+                Prepare for Placements
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-sidebar-width mt-16 p-margin-desktop max-w-container-max">
+<!-- Page Header -->
+<div class="mb-10 flex justify-between items-end">
+<div>
+<p class="font-label-caps text-label-caps text-secondary-fixed-dim uppercase tracking-wider mb-2">Command Center</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Hello, Future Engineer.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Your readiness matrix is looking solid today.</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-lg border border-outline-variant text-primary-fixed-dim font-medium hover:bg-surface-variant/30 hover:border-primary-fixed-dim/50 transition-all flex items-center gap-2 btn-shimmer relative overflow-hidden">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    New Log
+                </button>
+</div>
+</div>
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<!-- KPI 1: DSA Progress -->
+<div class="bg-surface rounded-2xl border border-outline-variant p-6 flex flex-col justify-between hover:border-primary-fixed-dim/30 transition-colors hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(0,220,229,0.2)] transition-transform animate-fade-in-up" style="animation-delay: 0.1s;">
+<div class="flex justify-between items-start mb-4">
+<div class="font-body-lg text-body-lg font-medium text-on-surface-variant">DSA Progress</div>
+<span class="material-symbols-outlined text-primary-fixed-dim bg-primary-fixed-dim/10 p-1.5 rounded-md">code</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<div class="font-display text-display text-on-surface">65<span class="text-headline-md text-on-surface-variant">%</span></div>
+<div class="font-label-caps text-label-caps text-secondary mt-1">240/368 Patterns</div>
+</div>
+<div class="w-20 h-20 relative">
+<svg class="circular-chart w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle stroke-primary-container glow-effect" d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="65, 100"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- KPI 2: Resume ATS Score -->
+<div class="bg-surface rounded-2xl border border-outline-variant p-6 flex flex-col justify-between hover:border-primary-fixed-dim/30 transition-colors hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(0,220,229,0.2)] transition-transform animate-fade-in-up" style="animation-delay: 0.2s;">
+<div class="flex justify-between items-start mb-4">
+<div class="font-body-lg text-body-lg font-medium text-on-surface-variant">Resume ATS Score</div>
+<span class="material-symbols-outlined text-primary-fixed-dim bg-primary-fixed-dim/10 p-1.5 rounded-md">document_scanner</span>
+</div>
+<div>
+<div class="flex items-end gap-2 mb-3">
+<div class="font-display text-display text-on-surface">82</div>
+<div class="font-stats-numeric text-stats-numeric text-on-surface-variant pb-2">/100</div>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 mt-2 border border-outline-variant/30 overflow-hidden">
+<div class="bg-gradient-to-r from-inverse-primary to-primary-container h-2 rounded-full glow-effect" style="width: 82%"></div>
+</div>
+<div class="font-label-caps text-label-caps text-secondary mt-3">High Probability Match</div>
+</div>
+</div>
+<!-- KPI 3: Weekly Readiness -->
+<div class="bg-surface rounded-2xl border border-outline-variant p-6 flex flex-col justify-between hover:border-primary-fixed-dim/30 transition-colors hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(0,220,229,0.2)] transition-transform animate-fade-in-up" style="animation-delay: 0.3s;">
+<div class="flex justify-between items-start mb-4">
+<div class="font-body-lg text-body-lg font-medium text-on-surface-variant">Weekly Readiness</div>
+<span class="material-symbols-outlined text-primary-fixed-dim bg-primary-fixed-dim/10 p-1.5 rounded-md">trending_up</span>
+</div>
+<div>
+<div class="flex items-end gap-2 mb-1">
+<div class="font-display text-display text-on-surface">78</div>
+<div class="font-stats-numeric text-stats-numeric text-on-surface-variant pb-2">%</div>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-secondary-fixed-dim flex items-center text-sm font-medium">
+<span class="material-symbols-outlined text-[16px] mr-1">arrow_upward</span>
+                            +5.2%
+                        </span>
+<span class="text-on-surface-variant text-sm">vs last week</span>
+</div>
+<!-- Simulated sparkline using gradient -->
+<div class="h-8 mt-4 w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-fixed-dim/20 to-transparent rounded-t-lg border-b border-primary-fixed-dim/40 opacity-70"></div>
+</div>
+</div>
+</div>
+<!-- Bottom Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Upcoming Interviews (Wider) -->
+<div class="lg:col-span-2 bg-surface rounded-2xl border border-outline-variant p-6 hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(0,220,229,0.2)] transition-transform hover:scale-[1.01] hover:shadow-[0_0_15px_rgba(0,220,229,0.1)] transition-all animate-fade-in-up" style="animation-delay: 0.4s;">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Upcoming Interviews</h3>
+<button class="text-primary-fixed-dim font-medium hover:text-primary-fixed transition-colors text-sm btn-shimmer relative overflow-hidden px-2 py-1 rounded-md">View Calendar</button>
+</div>
+<div class="space-y-4">
+<!-- Interview Item 1 -->
+<div class="flex items-center justify-between p-4 rounded-xl border border-outline-variant bg-surface-container-low hover:bg-surface-variant/30 transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center border border-outline-variant group-hover:border-primary-fixed-dim/50 transition-colors">
+<!-- Placeholder for Company Logo -->
+<span class="font-bold text-lg text-on-surface">A</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface">Software Engineering Intern</h4>
+<p class="text-on-surface-variant text-sm">Apex Technologies · Remote</p>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-secondary-fixed-dim bg-secondary-fixed-dim/10 px-2 py-1 rounded mb-1 inline-block">Round 1: Technical</div>
+<div class="text-on-surface font-medium text-sm flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span> Oct 24, 10:00 AM
+                            </div>
+</div>
+</div>
+<!-- Interview Item 2 -->
+<div class="flex items-center justify-between p-4 rounded-xl border border-outline-variant bg-surface-container-low hover:bg-surface-variant/30 transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center border border-outline-variant group-hover:border-primary-fixed-dim/50 transition-colors">
+<!-- Placeholder for Company Logo -->
+<span class="font-bold text-lg text-on-surface">O</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface">Backend Developer</h4>
+<p class="text-on-surface-variant text-sm">Omni Systems · On-site</p>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-tertiary-fixed-dim bg-tertiary-fixed-dim/10 px-2 py-1 rounded mb-1 inline-block">System Design</div>
+<div class="text-on-surface font-medium text-sm flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span> Nov 02, 2:30 PM
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Daily Goals (Narrower) -->
+<div class="bg-surface rounded-2xl border border-outline-variant p-6 flex flex-col hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(0,220,229,0.2)] transition-transform transition-all animate-fade-in-up" style="animation-delay: 0.5s;">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Daily Protocol</h3>
+<span class="font-label-caps text-label-caps text-on-surface-variant">0/3 Done</span>
+</div>
+<div class="flex-1 space-y-3">
+<!-- Goal 1 -->
+<label class="flex items-start gap-3 p-3 rounded-lg border border-transparent hover:border-outline-variant hover:bg-surface-variant/20 transition-all cursor-pointer group">
+<div class="relative flex items-start mt-0.5">
+<input class="peer appearance-none w-5 h-5 border-2 border-outline-variant rounded bg-transparent checked:bg-primary-container checked:border-primary-container transition-all" type="checkbox">
+<span class="material-symbols-outlined absolute text-[16px] text-on-primary-fixed opacity-0 peer-checked:opacity-100 pointer-events-none top-0.5 left-0.5" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<p class="text-on-surface font-medium group-hover:text-primary-fixed-dim transition-colors">Solve 2 LeetCode Mediums</p>
+<p class="text-xs text-on-surface-variant mt-0.5">Focus on Dynamic Programming</p>
+</div>
+</label>
+<!-- Goal 2 -->
+<label class="flex items-start gap-3 p-3 rounded-lg border border-transparent hover:border-outline-variant hover:bg-surface-variant/20 transition-all cursor-pointer group">
+<div class="relative flex items-start mt-0.5">
+<input class="peer appearance-none w-5 h-5 border-2 border-outline-variant rounded bg-transparent checked:bg-primary-container checked:border-primary-container transition-all" type="checkbox">
+<span class="material-symbols-outlined absolute text-[16px] text-on-primary-fixed opacity-0 peer-checked:opacity-100 pointer-events-none top-0.5 left-0.5" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<p class="text-on-surface font-medium group-hover:text-primary-fixed-dim transition-colors">Update Resume Bullets</p>
+<p class="text-xs text-on-surface-variant mt-0.5">Incorporate STAR method for latest project</p>
+</div>
+</label>
+<!-- Goal 3 -->
+<label class="flex items-start gap-3 p-3 rounded-lg border border-transparent hover:border-outline-variant hover:bg-surface-variant/20 transition-all cursor-pointer group">
+<div class="relative flex items-start mt-0.5">
+<input class="peer appearance-none w-5 h-5 border-2 border-outline-variant rounded bg-transparent checked:bg-primary-container checked:border-primary-container transition-all" type="checkbox">
+<span class="material-symbols-outlined absolute text-[16px] text-on-primary-fixed opacity-0 peer-checked:opacity-100 pointer-events-none top-0.5 left-0.5" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<p class="text-on-surface font-medium group-hover:text-primary-fixed-dim transition-colors">Mock Interview</p>
+<p class="text-xs text-on-surface-variant mt-0.5">Schedule 45m session with Peer Group A</p>
+</div>
+</label>
+</div>
+</div>
+</div>
+</main>
+</body></html>

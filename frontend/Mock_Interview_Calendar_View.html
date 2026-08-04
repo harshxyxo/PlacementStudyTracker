@@ -1,0 +1,383 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Mock Interview Scheduler - Placement &amp; Study Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#32353c",
+                      "surface-dim": "#10131a",
+                      "surface-container-low": "#191c22",
+                      "tertiary-fixed-dim": "#e7c427",
+                      "on-tertiary-container": "#736000",
+                      "surface-container-highest": "#32353c",
+                      "surface": "#10131a",
+                      "secondary-fixed": "#b7eaff",
+                      "primary": "#e9feff",
+                      "surface-container": "#1d2026",
+                      "surface-tint": "#00dce5",
+                      "on-tertiary-fixed-variant": "#544600",
+                      "error": "#ffb4ab",
+                      "on-primary-fixed-variant": "#004f53",
+                      "tertiary-container": "#ffdb3f",
+                      "background": "#10131a",
+                      "on-primary-container": "#006c71",
+                      "tertiary-fixed": "#ffe16c",
+                      "surface-container-lowest": "#0b0e14",
+                      "surface-container-high": "#272a31",
+                      "outline": "#849495",
+                      "on-secondary-fixed-variant": "#004e60",
+                      "primary-fixed-dim": "#00dce5",
+                      "surface-bright": "#363940",
+                      "on-surface-variant": "#b9caca",
+                      "secondary": "#a6e6ff",
+                      "on-error-container": "#ffdad6",
+                      "secondary-container": "#14d1ff",
+                      "on-secondary-container": "#00566b",
+                      "on-error": "#690005",
+                      "on-primary": "#003739",
+                      "on-background": "#e1e2eb",
+                      "primary-container": "#00f5ff",
+                      "error-container": "#93000a",
+                      "on-tertiary": "#3a3000",
+                      "on-surface": "#e1e2eb",
+                      "on-primary-fixed": "#002021",
+                      "outline-variant": "#3a494a",
+                      "primary-fixed": "#63f7ff",
+                      "on-secondary-fixed": "#001f28",
+                      "on-secondary": "#003543",
+                      "on-tertiary-fixed": "#221b00",
+                      "inverse-on-surface": "#2e3037",
+                      "tertiary": "#fff9f0",
+                      "secondary-fixed-dim": "#4cd6ff",
+                      "inverse-primary": "#00696e",
+                      "inverse-surface": "#e1e2eb"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1440px",
+                      "unit": "4px",
+                      "stack-gap": "12px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "sidebar-width": "240px",
+                      "margin-desktop": "40px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "stats-numeric": [
+                              "Inter"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "display": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "stats-numeric": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #0B0E14; /* surface-container-lowest */
+            color: #e1e2eb; /* on-background */
+        }
+        
+        /* Custom Scrollbar for sleek dark look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0E14; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #272a31; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #363940; 
+        }
+
+        .gradient-btn {
+            background: linear-gradient(135deg, #00dce5, #00f5ff);
+            color: #002021;
+        }
+        
+        .gradient-btn:hover {
+            box-shadow: 0 0 15px rgba(0, 220, 229, 0.4);
+        }
+
+        .glass-card {
+            background: #161B22; /* surface-dim proxy */
+            border: 1px solid #30363D; /* outline-variant proxy */
+        }
+        
+        .glass-card-hover:hover {
+            border-color: #00dce5;
+            box-shadow: 0 0 10px rgba(0, 220, 229, 0.1);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md text-on-background bg-surface-container-lowest flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="w-sidebar-width h-screen fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-low border-r border-outline-variant hidden md:flex flex-col h-full py-gutter px-stack-gap z-40">
+<!-- Brand/Profile Area -->
+<div class="flex items-center gap-4 mb-8 pt-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-fixed-dim/30">
+<img class="w-full h-full object-cover" data-alt="A stylized, modern 3D avatar of an engineering student in a high-tech dark mode environment. The avatar has subtle neon teal accents reflecting off their face. Professional yet futuristic, suited for a high-end productivity app profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRdVlizHAtl5fLBPTPiZgttUbRHFXRkPQv8z1ySn0W1O7DdS8Rk2GbhaTnU1wUm_ygCodKDXMIRQTHsDpcds2z658sndM8IsH-ZfvT1cNmvc9mKaeVKG6rW1_AO3F071WguFBu9a7yvmG0qjosJsHXgNzwEX5hhJ9xITkQEYd73ZFmz2dhjhhu_X7bUJ0pyey169ijAYGJLrmbu6HYLhqzRLkmoCpxS6c3BcwuTLWay6ZWnGe7BWnI_CuMIVjH7RFUt2Sb56fVoIlc">
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary-fixed-dim">Future Engineer</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Career Roadmap</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0;">grid_view</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0;">terminal</span>
+                DSA Tracker
+            </a>
+<!-- Active State: Assuming Mock Interviews falls under a new tab or 'Prepare for Placements' CTA domain, but let's highlight an intent. We'll highlight 'Analytics' as a proxy for tracking progress, or create a 'Mock Interviews' active state if allowed. Strict rules say use exact labels. No label perfectly matches. 'Dashboard' might be best fallback, but prompt implies a specific feature. Let's assume 'Dashboard' is active since it's the closest to an overview of scheduled items if 'Mock Interviews' isn't explicitly listed in JSON. Wait, JSON: tab_labels: ["Dashboard", "DSA Tracker", "Resume", "Companies", "Analytics", "Settings"]. We will highlight Dashboard as fallback. -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary-fixed-dim font-bold bg-surface-variant/50 border-l-2 border-secondary-fixed-dim scale-95 active:scale-90 transition-transform" href="#"><span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">record_voice_over</span>Mock Interviews</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0;">article</span>
+                Resume
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0;">apartment</span>
+                Companies
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0;">insights</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/30 hover:text-primary-fixed-dim transition-colors scale-95 active:scale-90 transition-transform mt-auto mb-4" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0;">settings</span>
+                Settings
+            </a>
+</nav>
+<!-- CTA -->
+<button class="w-full py-3 rounded-lg gradient-btn font-body-md font-bold text-on-primary-fixed uppercase tracking-wider scale-95 active:scale-90 transition-all">
+            Prepare for Placements
+        </button>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 md:ml-[240px] flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-240px)] z-50 bg-surface-container-lowest/80 dark:bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16">
+<!-- Mobile Menu Toggle (Left) -->
+<div class="md:hidden flex items-center">
+<button class="text-on-surface-variant p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Product Name / Brand (Left on desktop, center mobile) -->
+<div class="flex items-center gap-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary-fixed-dim hidden md:block tracking-tight">Placement &amp; Study Tracker</h1>
+<!-- Search Bar -->
+<div class="relative hidden lg:flex items-center focus-within:ring-2 focus-within:ring-primary-fixed-dim/20 rounded-lg bg-surface-container-high px-3 py-1.5 border border-outline-variant/50">
+<span class="material-symbols-outlined text-on-surface-variant mr-2 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md text-on-surface placeholder:text-on-surface-variant w-48 p-0" placeholder="Search..." type="text">
+</div>
+</div>
+<!-- Trailing Icons & Profile (Right) -->
+<div class="flex items-center gap-2 md:gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary-fixed hover:bg-surface-variant rounded-lg transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary-fixed hover:bg-surface-variant rounded-lg transition-all hidden sm:block">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2 md:hidden">
+<img class="w-full h-full object-cover" data-alt="A small circular avatar placeholder showing a generic user silhouette in high contrast dark mode styling, matching a sleek professional dashboard environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhW-5XmIjpEcwR30AnmBlMRTLaEziGojMWB3FdYb9uiew9NDad5cpfUyXyDsy5w4eQF-_YH9S0HWdAq8EU8vYsafEV7pHPkxH8MlDfyjNAFZCWHbOlloysoJhEovJ8moekgppY5Q1E5YWtKV8D7g4UjJWFsPKN6HRGsGroMC3tt_F6W7jnKnZ9E68PtazF9_mjC86FozVTDajLVTw5z5DbR3rwMFGtz9gYxbWLR-wyXRGQaHETZW46iLCVUajNWRx876ht-OitBj53">
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 pt-24 pb-12 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Page Header & Global CTA -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
+<div>
+<h2 class="font-display text-display font-bold text-on-surface mb-2 tracking-tight">Mock Interviews</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Schedule sessions with industry experts to perfect your technique.</p>
+</div>
+<button class="px-6 py-3 rounded-lg gradient-btn font-body-md font-bold flex items-center gap-2 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">add</span>
+                    Schedule New Mock
+                </button>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Column: Upcoming & Empty State (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Section Title -->
+<div class="flex items-center justify-between border-b border-outline-variant pb-2"><h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Upcoming Sessions</h3><div class="flex items-center gap-2 bg-surface-container-high p-1 rounded-lg"><button class="px-3 py-1 rounded-md text-label-caps text-on-surface-variant hover:text-on-surface transition-colors">List</button><button class="px-3 py-1 rounded-md bg-primary-fixed-dim text-on-primary-fixed font-bold text-label-caps">Calendar</button></div></div>
+<!-- Empty State (Hidden by default, shown for demonstration if no items) -->
+<!-- <div class="glass-card rounded-2xl p-12 flex flex-col items-center justify-center text-center border-dashed border-2 border-outline-variant">
+                        <div class="w-20 h-20 bg-surface-container-high rounded-full flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-4xl text-on-surface-variant">calendar_month</span>
+                        </div>
+                        <h4 class="font-headline-md text-headline-md font-semibold text-on-surface mb-2">No Upcoming Mocks</h4>
+                        <p class="text-on-surface-variant mb-6 max-w-md">You have no mock interviews scheduled. Book a session now to practice your system design and DSA skills.</p>
+                        <button class="px-4 py-2 rounded-lg border border-primary-fixed-dim text-primary-fixed-dim hover:bg-primary-fixed-dim/10 transition-colors font-medium">
+                            Find an Interviewer
+                        </button>
+                    </div> -->
+<!-- Upcoming List -->
+<div class="glass-card rounded-2xl p-6 flex flex-col gap-6"><div class="flex items-center justify-between mb-2"><h4 class="font-headline-md text-on-surface">October 2023</h4><div class="flex gap-2"><button class="p-2 rounded-lg hover:bg-surface-variant text-on-surface-variant"><span class="material-symbols-outlined">chevron_left</span></button><button class="p-2 rounded-lg hover:bg-surface-variant text-on-surface-variant"><span class="material-symbols-outlined">chevron_right</span></button></div></div><div class="grid grid-cols-7 gap-2 text-center border-b border-outline-variant/30 pb-2"><div class="text-label-caps text-on-surface-variant">Sun</div><div class="text-label-caps text-on-surface-variant">Mon</div><div class="text-label-caps text-on-surface-variant">Tue</div><div class="text-label-caps text-on-surface-variant">Wed</div><div class="text-label-caps text-on-surface-variant">Thu</div><div class="text-label-caps text-on-surface-variant">Fri</div><div class="text-label-caps text-on-surface-variant">Sat</div></div><div class="grid grid-cols-7 gap-2"><div class="h-24 p-2 rounded-lg text-on-surface-variant/30">24</div><div class="h-24 p-2 rounded-lg text-on-surface-variant/30">25</div><div class="h-24 p-2 rounded-lg text-on-surface-variant/30">26</div><div class="h-24 p-2 rounded-lg text-on-surface-variant/30">27</div><div class="h-24 p-2 rounded-lg text-on-surface-variant/30">28</div><div class="h-24 p-2 rounded-lg text-on-surface-variant/30">29</div><div class="h-24 p-2 rounded-lg text-on-surface-variant/30">30</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">1<div class="mt-1 flex items-center gap-1 text-secondary-fixed-dim/70"><span class="material-symbols-outlined text-xs">check_circle</span><span class="text-[9px] font-label-caps uppercase tracking-wider">Joined</span></div></div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">2</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">3</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">4</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">5</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">6</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">7</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">8</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">9</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">10<div class="mt-1 flex items-center gap-1 text-secondary-fixed-dim/70"><span class="material-symbols-outlined text-xs">check_circle</span><span class="text-[9px] font-label-caps uppercase tracking-wider">Joined</span></div></div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">11</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">12</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">13</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">14</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">15</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">16</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">17</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">18</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">19</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">20</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">21</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">22</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">23</div><div class="h-24 p-2 rounded-lg bg-primary-fixed-dim/20 border-2 border-primary-fixed-dim text-primary-fixed-dim relative hover:scale-[1.02] transition-transform cursor-pointer hover:scale-105"><span class="font-bold">24</span><div class="absolute bottom-2 left-2 right-2 flex flex-col gap-1"><div class="bg-primary-fixed-dim text-on-primary-fixed text-[10px] p-1 rounded truncate font-bold">Mock: David Chen</div><div class="bg-primary-fixed-dim/30 text-primary-fixed-dim text-[9px] px-1 rounded truncate font-medium uppercase tracking-wider">SDE II @ Amazon</div></div></div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">25</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">26</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">27</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">28</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">29</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">30</div><div class="h-24 p-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-on-surface hover:bg-surface-variant/50 transition-all cursor-pointer hover:scale-105">31</div></div></div>
+</div>
+<!-- Right Column: Past Feedback & Stats (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Section Title -->
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Past Feedback</h3>
+<span class="material-symbols-outlined text-on-surface-variant">history</span>
+</div>
+<!-- Feedback Card 1 -->
+<div class="glass-card rounded-2xl p-5 flex flex-col gap-3 glass-card-hover transition-all hover:scale-[1.02]">
+<div class="flex justify-between items-start">
+<div>
+<h5 class="font-bold text-on-surface">System Design</h5>
+<p class="text-xs text-on-surface-variant">Oct 10 • w/ Alex R. (Stripe)</p>
+</div>
+<!-- Score Badge -->
+<div class="bg-[#1a2e25] text-green-400 font-stats-numeric font-bold px-3 py-1 rounded-lg border border-green-900/50 flex items-center gap-1">
+                                8.5 <span class="text-xs text-green-600/80 font-normal">/10</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg border border-outline-variant/30 text-sm text-on-surface-variant italic relative">
+<span class="material-symbols-outlined absolute -top-2 -left-2 text-surface-variant rotate-180 bg-surface-container-lowest rounded-full text-sm">format_quote</span>
+                            "Great high-level architecture. Need to dive deeper into database sharding trade-offs during the deep dive section. Communication was clear."
+                        </div>
+<div class="flex flex-wrap gap-2 mt-1">
+<span class="px-2 py-1 rounded-md bg-surface-variant text-xs font-label-caps text-on-surface-variant">Strong Architecture</span>
+<span class="px-2 py-1 rounded-md bg-error-container/20 border border-error-container/50 text-error text-xs font-label-caps">Review Sharding</span>
+</div>
+</div>
+<!-- Feedback Card 2 -->
+<div class="glass-card rounded-2xl p-5 flex flex-col gap-3 glass-card-hover transition-all hover:scale-[1.02]">
+<div class="flex justify-between items-start">
+<div>
+<h5 class="font-bold text-on-surface">DSA - Graphs</h5>
+<p class="text-xs text-on-surface-variant">Sep 28 • w/ Mia T. (Meta)</p>
+</div>
+<!-- Score Badge -->
+<div class="bg-[#2e261a] text-yellow-400 font-stats-numeric font-bold px-3 py-1 rounded-lg border border-yellow-900/50 flex items-center gap-1">
+                                7.0 <span class="text-xs text-yellow-600/80 font-normal">/10</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-lg border border-outline-variant/30 text-sm text-on-surface-variant italic relative">
+<span class="material-symbols-outlined absolute -top-2 -left-2 text-surface-variant rotate-180 bg-surface-container-lowest rounded-full text-sm">format_quote</span>
+                            "Identified Dijkstra's quickly, but struggled with implementing the priority queue from scratch in Python. Practice standard library equivalents."
+                        </div>
+<button class="mt-2 w-full py-2 rounded-lg border border-outline-variant text-sm font-medium text-on-surface hover:bg-surface-variant transition-colors">
+                            View Detailed Report
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+
+
+
+
+
+
+
+</body></html>
