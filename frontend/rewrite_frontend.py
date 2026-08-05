@@ -22,7 +22,7 @@ interface MockInterview {
     status: string;
 }
 """
-    content = content.replace("const MockInterviewScheduling: React.FC = () => {", interface_def + "\nconst MockInterviewScheduling: React.FC = () => {\n    const [interviews, setInterviews] = useState<MockInterview[]>([]);\n    useEffect(() => {\n        const fetchInterviews = async () => {\n            const res = await fetch('http://localhost:8080/api/interviews', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });\n            if (res.ok) { setInterviews(await res.json()); }\n        };\n        fetchInterviews();\n    }, []);\n")
+    content = content.replace("const MockInterviewScheduling: React.FC = () => {", interface_def + "\nconst MockInterviewScheduling: React.FC = () => {\n    const [interviews, setInterviews] = useState<MockInterview[]>([]);\n    useEffect(() => {\n        const fetchInterviews = async () => {\n            const res = await fetch('https://placementstudytracker.onrender.com:8080/api/interviews', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });\n            if (res.ok) { setInterviews(await res.json()); }\n        };\n        fetchInterviews();\n    }, []);\n")
 
     # Replace the two static cards with a map.
     # The first card starts with <div className="glass-card rounded-2xl p-6 glass-card-hover transition-all relative overflow-hidden group hover:scale-[1.02]">
@@ -103,7 +103,7 @@ interface ResumeAnalysis {
 
     useEffect(() => {
         const fetchLatest = async () => {
-            const res = await fetch('http://localhost:8080/api/resume/latest', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+            const res = await fetch('https://placementstudytracker.onrender.com:8080/api/resume/latest', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
             if (res.ok) {
                 const data = await res.json();
                 if (data) setAnalysis(data);
@@ -114,7 +114,7 @@ interface ResumeAnalysis {
 
     const triggerAnalysis = async () => {
         setLoading(true);
-        const res = await fetch('http://localhost:8080/api/resume/analyze', { method: 'POST', headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+        const res = await fetch('https://placementstudytracker.onrender.com:8080/api/resume/analyze', { method: 'POST', headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
         if (res.ok) {
             setAnalysis(await res.json());
         }

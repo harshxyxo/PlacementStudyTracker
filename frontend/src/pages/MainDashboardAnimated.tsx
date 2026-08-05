@@ -41,8 +41,8 @@ const MainDashboardAnimated: React.FC = () => {
             const headers = { 'Authorization': `Bearer ${localStorage.getItem('token')}` };
             try {
                 const [statsRes, tasksRes] = await Promise.all([
-                    fetch('http://localhost:8080/api/dashboard/stats', { headers }),
-                    fetch('http://localhost:8080/api/tasks/today', { headers })
+                    fetch('https://placementstudytracker.onrender.com:8080/api/dashboard/stats', { headers }),
+                    fetch('https://placementstudytracker.onrender.com:8080/api/tasks/today', { headers })
                 ]);
                 
                 if (statsRes.ok) {
@@ -62,7 +62,7 @@ const MainDashboardAnimated: React.FC = () => {
         setTasks(prev => prev.map(t => t.id === taskId ? { ...t, completed: !currentStatus } : t));
         
         try {
-            await fetch(`http://localhost:8080/api/tasks/${taskId}/toggle`, {
+            await fetch(`https://placementstudytracker.onrender.com:8080/api/tasks/${taskId}/toggle`, {
                 method: 'PATCH',
                 headers: { 
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -80,7 +80,7 @@ const MainDashboardAnimated: React.FC = () => {
         e.preventDefault();
         setIsSubmittingLog(true);
         try {
-            const response = await fetch('http://localhost:8080/api/activity-logs', {
+            const response = await fetch('https://placementstudytracker.onrender.com:8080/api/activity-logs', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,

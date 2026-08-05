@@ -27,7 +27,7 @@ const MockInterviewScheduling: React.FC = () => {
     const [topic, setTopic] = useState('');
     const [scheduledAt, setScheduledAt] = useState('');
     const fetchInterviews = async () => {
-        const res = await fetch('http://localhost:8080/api/interviews', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+        const res = await fetch('https://placementstudytracker.onrender.com:8080/api/interviews', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
         if (res.ok) { setInterviews(await res.json()); }
     };
     
@@ -37,7 +37,7 @@ const MockInterviewScheduling: React.FC = () => {
 
     const handleSchedule = async (e: React.FormEvent) => {
         e.preventDefault();
-        const res = await fetch('http://localhost:8080/api/interviews', {
+        const res = await fetch('https://placementstudytracker.onrender.com:8080/api/interviews', {
             method: 'POST',
             headers: { 
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,

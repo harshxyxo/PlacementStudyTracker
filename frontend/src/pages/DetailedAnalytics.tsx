@@ -17,7 +17,7 @@ const DetailedAnalytics: React.FC = () => {
 
     useEffect(() => {
         const headers = { 'Authorization': `Bearer ${localStorage.getItem('token')}` };
-        fetch('http://localhost:8080/api/problems/stats?userId=testUser123', { headers })
+        fetch('https://placementstudytracker.onrender.com:8080/api/problems/stats?userId=testUser123', { headers })
             .then(res => res.json())
             .then((data: CategoryStats[]) => {
                 setStats(data);
@@ -26,12 +26,12 @@ const DetailedAnalytics: React.FC = () => {
             })
             .catch(err => console.error("Failed to fetch stats", err));
             
-        fetch('http://localhost:8080/api/analytics/heatmap', { headers })
+        fetch('https://placementstudytracker.onrender.com:8080/api/analytics/heatmap', { headers })
             .then(res => res.json())
             .then(data => setHeatmapData(data))
             .catch(err => console.error(err));
             
-        fetch('http://localhost:8080/api/analytics/activities', { headers })
+        fetch('https://placementstudytracker.onrender.com:8080/api/analytics/activities', { headers })
             .then(res => res.json())
             .then(data => setActivities(data))
             .catch(err => console.error(err));

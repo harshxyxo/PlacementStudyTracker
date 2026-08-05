@@ -15,7 +15,7 @@ const Settings: React.FC = () => {
       const token = localStorage.getItem('token');
       if (!token) return;
       try {
-        const response = await fetch('http://localhost:8080/api/user/profile', {
+        const response = await fetch('https://placementstudytracker.onrender.com:8080/api/user/profile', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (response.ok) {
@@ -34,7 +34,7 @@ const Settings: React.FC = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch('http://localhost:8080/api/user/profile', {
+      const response = await fetch('https://placementstudytracker.onrender.com:8080/api/user/profile', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ const Settings: React.FC = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch('http://localhost:8080/api/user/password', {
+      const response = await fetch('https://placementstudytracker.onrender.com:8080/api/user/password', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

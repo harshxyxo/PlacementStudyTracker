@@ -27,7 +27,7 @@ state_code = """
     
     useEffect(() => {
         const fetchApps = async () => {
-            const res = await fetch('http://localhost:8080/api/companies', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+            const res = await fetch('https://placementstudytracker.onrender.com:8080/api/companies', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
             if (res.ok) setApplications(await res.json());
         };
         fetchApps();
