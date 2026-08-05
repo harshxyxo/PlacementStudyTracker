@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "TERI_API_KEY",
+  apiKey: "AIzaSyD4dLYMbOj9R4Vu2FZBWLOU_UlUNa7Vs_o",
   authDomain: "placemend-and-studytracker.firebaseapp.com",
   projectId: "placemend-and-studytracker",
   storageBucket: "placemend-and-studytracker.firebasestorage.app",
@@ -11,9 +11,7 @@ const firebaseConfig = {
   measurementId: "G-CM4RRMD96H"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// YE DONO LINES SABSE ZAROORI HAIN (Inhi ka error aa raha hai)
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
