@@ -25,7 +25,7 @@ const ResumeAnalyzer: React.FC = () => {
     useEffect(() => {
         const fetchLatest = async () => {
             if (!sessionStorage.getItem('resume_session_active')) return;
-            const res = await fetch(`${API_BASE_URL}:8080/api/resume/latest`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+            const res = await fetch(`${API_BASE_URL}/api/resume/latest`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
             if (res.ok) {
                 const data = await res.json();
                 if (data) setAnalysis(data);
@@ -43,7 +43,7 @@ const ResumeAnalyzer: React.FC = () => {
         formData.append('file', file);
 
         try {
-            const res = await fetch(`${API_BASE_URL}:8080/api/resume/analyze`, {
+            const res = await fetch(`${API_BASE_URL}/api/resume/analyze`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
                 body: formData
@@ -68,7 +68,7 @@ const ResumeAnalyzer: React.FC = () => {
     const handleAcknowledgeKeyword = async (keyword: string) => {
         if (!analysis) return;
         try {
-            const res = await fetch(`${API_BASE_URL}:8080/api/resume/${analysis.id}/acknowledge-keyword`, {
+            const res = await fetch(`${API_BASE_URL}/api/resume/${analysis.id}/acknowledge-keyword`, {
                 method: 'PATCH',
                 headers: { 
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -92,7 +92,7 @@ const ResumeAnalyzer: React.FC = () => {
         setIsDownloading(true);
         try {
             const toastId = toast.loading('Generating PDF...');
-            const res = await fetch(`${API_BASE_URL}:8080/api/resume/${analysis.id}/download-enhanced`, {
+            const res = await fetch(`${API_BASE_URL}/api/resume/${analysis.id}/download-enhanced`, {
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
             });
             if (res.ok) {

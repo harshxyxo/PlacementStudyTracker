@@ -25,7 +25,7 @@ const CompanyKanbanBoard: React.FC = () => {
     
     useEffect(() => {
         const fetchApps = async () => {
-            const res = await fetch(`${API_BASE_URL}:8080/api/companies`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+            const res = await fetch(`${API_BASE_URL}/api/companies`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
             if (res.ok) setApplications(await res.json());
         };
         fetchApps();
@@ -41,7 +41,7 @@ const CompanyKanbanBoard: React.FC = () => {
         setIsSubmitting(true);
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`${API_BASE_URL}:8080/api/companies`, {
+            const response = await fetch(`${API_BASE_URL}/api/companies`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...newCompany, appliedDate: new Date().toISOString() })

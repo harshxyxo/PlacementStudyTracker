@@ -46,7 +46,7 @@ const DSATracker: React.FC = () => {
       setIsSubmitting(true);
       try {
           const token = localStorage.getItem('token');
-          const response = await fetch(`${API_BASE_URL}:8080/api/problems/custom`, {
+          const response = await fetch(`${API_BASE_URL}/api/problems/custom`, {
               method: 'POST',
               headers: { 
                   'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ const DSATracker: React.FC = () => {
       if (difficultyFilter) params.append('difficulty', difficultyFilter);
       if (statusFilter) params.append('status', statusFilter);
 
-      const res = await fetch(`${API_BASE_URL}:8080/api/problems?${params.toString()}`, {
+      const res = await fetch(`${API_BASE_URL}/api/problems?${params.toString()}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -116,7 +116,7 @@ const DSATracker: React.FC = () => {
   const fetchStats = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`${API_BASE_URL}:8080/api/problems/stats`, {
+      const res = await fetch(`${API_BASE_URL}/api/problems/stats`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -131,7 +131,7 @@ const DSATracker: React.FC = () => {
   const fetchInsight = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`${API_BASE_URL}:8080/api/problems/insights`, {
+      const res = await fetch(`${API_BASE_URL}/api/problems/insights`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -160,7 +160,7 @@ const DSATracker: React.FC = () => {
     
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`${API_BASE_URL}:8080/api/problems/${id}/status`, {
+      const res = await fetch(`${API_BASE_URL}/api/problems/${id}/status`, {
         method: 'PATCH',
         headers: { 
           'Content-Type': 'application/json',

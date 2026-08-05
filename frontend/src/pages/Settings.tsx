@@ -16,7 +16,7 @@ const Settings: React.FC = () => {
       const token = localStorage.getItem('token');
       if (!token) return;
       try {
-        const response = await fetch(`${API_BASE_URL}:8080/api/user/profile`, {
+        const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (response.ok) {
@@ -35,7 +35,7 @@ const Settings: React.FC = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`${API_BASE_URL}:8080/api/user/profile`, {
+      const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ const Settings: React.FC = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`${API_BASE_URL}:8080/api/user/password`, {
+      const response = await fetch(`${API_BASE_URL}/api/user/password`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

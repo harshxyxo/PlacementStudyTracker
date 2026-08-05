@@ -69,7 +69,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         const fetchNotifications = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch(`${API_BASE_URL}:8080/api/notifications`, {
+                const response = await fetch(`${API_BASE_URL}/api/notifications`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (response.ok) {
@@ -85,7 +85,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const markNotificationAsRead = async (id: string) => {
         try {
             const token = localStorage.getItem('token');
-            await fetch(`${API_BASE_URL}:8080/api/notifications/${id}/read`, {
+            await fetch(`${API_BASE_URL}/api/notifications/${id}/read`, {
                 method: 'PATCH',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -106,7 +106,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             setIsSearching(true);
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch(`${API_BASE_URL}:8080/api/search?q=${encodeURIComponent(searchQuery)}`, {
+                const response = await fetch(`${API_BASE_URL}/api/search?q=${encodeURIComponent(searchQuery)}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (response.ok) {
