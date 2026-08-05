@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithRedirect } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase';
 import API_BASE_URL from '../config';
 
@@ -14,7 +14,7 @@ const Login: React.FC = () => {
 
   const handleGoogleAuth = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      await signInWithRedirect(auth, googleProvider);
       toast.success('Google login successful');
       window.location.href = '/dashboard';
     } catch (err) {
