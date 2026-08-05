@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase';
+import API_BASE_URL from '../config';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -25,7 +26,7 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://placementstudytracker.onrender.com:8080/api/auth/login', {
+      const response = await fetch(`${API_BASE_URL}:8080/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

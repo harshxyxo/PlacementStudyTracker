@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import Layout from '../components/Layout';
+import API_BASE_URL from '../config';
 
 interface DailyTask {
     id: string;
@@ -41,8 +42,8 @@ const MainDashboardAnimated: React.FC = () => {
             const headers = { 'Authorization': `Bearer ${localStorage.getItem('token')}` };
             try {
                 const [statsRes, tasksRes] = await Promise.all([
-                    fetch('https://placementstudytracker.onrender.com:8080/api/dashboard/stats', { headers }),
-                    fetch('https://placementstudytracker.onrender.com:8080/api/tasks/today', { headers })
+                    fetch(`${API_BASE_URL}:8080/api/dashboard/stats`, { headers }),
+                    fetch(`${API_BASE_URL}:8080/api/tasks/today`, { headers })
                 ]);
                 
                 if (statsRes.ok) {
@@ -62,7 +63,7 @@ const MainDashboardAnimated: React.FC = () => {
         setTasks(prev => prev.map(t => t.id === taskId ? { ...t, completed: !currentStatus } : t));
         
         try {
-            await fetch(`https://placementstudytracker.onrender.com:8080/api/tasks/${taskId}/toggle`, {
+            await fetch(`${API_BASE_URL}:8080/api/tasks/${taskId}/toggle`, {
                 method: 'PATCH',
                 headers: { 
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -80,7 +81,7 @@ const MainDashboardAnimated: React.FC = () => {
         e.preventDefault();
         setIsSubmittingLog(true);
         try {
-            const response = await fetch('https://placementstudytracker.onrender.com:8080/api/activity-logs', {
+            const response = await fetch(`${API_BASE_URL}:8080/api/activity-logs`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,

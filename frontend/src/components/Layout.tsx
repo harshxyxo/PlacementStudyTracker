@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import type { User as FirebaseUser } from 'firebase/auth';
 import { auth } from '../firebase';
+import API_BASE_URL from '../config';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -68,7 +69,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         const fetchNotifications = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch('https://placementstudytracker.onrender.com:8080/api/notifications', {
+                const response = await fetch(`${API_BASE_URL}:8080/api/notifications`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (response.ok) {
@@ -84,7 +85,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const markNotificationAsRead = async (id: string) => {
         try {
             const token = localStorage.getItem('token');
-            await fetch(`https://placementstudytracker.onrender.com:8080/api/notifications/${id}/read`, {
+            await fetch(`${API_BASE_URL}:8080/api/notifications/${id}/read`, {
                 method: 'PATCH',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -105,7 +106,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             setIsSearching(true);
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch(`https://placementstudytracker.onrender.com:8080/api/search?q=${encodeURIComponent(searchQuery)}`, {
+                const response = await fetch(`${API_BASE_URL}:8080/api/search?q=${encodeURIComponent(searchQuery)}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (response.ok) {

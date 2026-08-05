@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import API_BASE_URL from '../config';
 
 interface CategoryStats {
     category: string;
@@ -17,7 +18,7 @@ const DetailedAnalytics: React.FC = () => {
 
     useEffect(() => {
         const headers = { 'Authorization': `Bearer ${localStorage.getItem('token')}` };
-        fetch('https://placementstudytracker.onrender.com:8080/api/problems/stats?userId=testUser123', { headers })
+        fetch(`${API_BASE_URL}:8080/api/problems/stats?userId=testUser123`, { headers })
             .then(res => res.json())
             .then((data: CategoryStats[]) => {
                 setStats(data);
@@ -26,12 +27,12 @@ const DetailedAnalytics: React.FC = () => {
             })
             .catch(err => console.error("Failed to fetch stats", err));
             
-        fetch('https://placementstudytracker.onrender.com:8080/api/analytics/heatmap', { headers })
+        fetch(`${API_BASE_URL}:8080/api/analytics/heatmap`, { headers })
             .then(res => res.json())
             .then(data => setHeatmapData(data))
             .catch(err => console.error(err));
             
-        fetch('https://placementstudytracker.onrender.com:8080/api/analytics/activities', { headers })
+        fetch(`${API_BASE_URL}:8080/api/analytics/activities`, { headers })
             .then(res => res.json())
             .then(data => setActivities(data))
             .catch(err => console.error(err));
